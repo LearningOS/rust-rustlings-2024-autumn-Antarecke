@@ -77,12 +77,10 @@ impl<T> LinkedList<T> {
     
         while let Some(node) = current {
             unsafe {
-                // Swap the next and prev pointers
                 let next = (*node.as_ptr()).next;
                 (*node.as_ptr()).next = (*node.as_ptr()).prev;
                 (*node.as_ptr()).prev = next;
             }
-            // Move to the next node (which is now the previous node)
             current = unsafe { (*node.as_ptr()).prev };
         }
     
